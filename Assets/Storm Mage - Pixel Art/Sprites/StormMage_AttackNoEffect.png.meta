@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: 2aa29d0cf2c5bfa40a6c81c12b0af7c5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: StormMage_AttackNoEffect_0
+  - first:
+      213: 21300002
+    second: StormMage_AttackNoEffect_1
+  - first:
+      213: 21300004
+    second: StormMage_AttackNoEffect_2
+  - first:
+      213: 21300006
+    second: StormMage_AttackNoEffect_3
+  - first:
+      213: 21300008
+    second: StormMage_AttackNoEffect_4
+  - first:
+      213: 21300010
+    second: StormMage_AttackNoEffect_5
+  - first:
+      213: 21300012
+    second: StormMage_AttackNoEffect_6
+  - first:
+      213: 21300014
+    second: StormMage_AttackNoEffect_7
+  - first:
+      213: 21300016
+    second: StormMage_AttackNoEffect_8
+  - first:
+      213: 21300018
+    second: StormMage_AttackNoEffect_9
+  - first:
+      213: 21300020
+    second: StormMage_AttackNoEffect_10
+  - first:
+      213: 21300022
+    second: StormMage_AttackNoEffect_11
+  - first:
+      213: 21300024
+    second: StormMage_AttackNoEffect_12
+  - first:
+      213: 21300026
+    second: StormMage_AttackNoEffect_13
+  - first:
+      213: 21300028
+    second: StormMage_AttackNoEffect_14
+  - first:
+      213: 21300030
+    second: StormMage_AttackNoEffect_15
+  - first:
+      213: 21300032
+    second: StormMage_AttackNoEffect_16
+  - first:
+      213: 21300034
+    second: StormMage_AttackNoEffect_17
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 40
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7c68c827a46481438772044f7764f0e
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 400
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1fd4f0b3a6178b428c1176d09f135b2
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 400
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 316cdd0af69682044adde2a8f85b5b18
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 400
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fed97a59801fd14fb6cce786339a7b7
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1359393bdef26574a904a48e68bbc061
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 300
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 409e5278886f9fe4784f7d42127d0f12
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_6
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 300
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58c16f6c25790e0428dbd9a97ac0ce15
+      internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_7
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 300
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb112dfb18043d64689e82444d08ea13
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be98810d93b048c4b82b2cd48c797489
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 200
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79fab81f25228d54d9f8dfdb89cc92a0
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_10
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 200
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c0f5114e13728a44b42c3875c2de2cd
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_11
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 200
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2221b03675dfe544b8ccfff03032a933
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3193ad2bf1e54bb49b6e011cd4de79b4
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 100
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c519a09635a8ca4b84fae02deedb924
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 100
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6244dcb0ff15d24aaa3e205e61e3f5e
+      internalID: 21300028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_15
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 100
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c57e2fd840ab11409261d398ed4a1fb
+      internalID: 21300030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2b923c8bc9e9f640abbb93eaed45b98
+      internalID: 21300032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StormMage_AttackNoEffect_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3cc44b912f83284e8d3e872ff750c6a
+      internalID: 21300034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 7dbb70b64bbca324d947268648a62099
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      StormMage_AttackNoEffect_17: 21300034
+      StormMage_AttackNoEffect_8: 21300016
+      StormMage_AttackNoEffect_16: 21300032
+      StormMage_AttackNoEffect_5: 21300010
+      StormMage_AttackNoEffect_9: 21300018
+      StormMage_AttackNoEffect_12: 21300024
+      StormMage_AttackNoEffect_14: 21300028
+      StormMage_AttackNoEffect_15: 21300030
+      StormMage_AttackNoEffect_2: 21300004
+      StormMage_AttackNoEffect_11: 21300022
+      StormMage_AttackNoEffect_4: 21300008
+      StormMage_AttackNoEffect_10: 21300020
+      StormMage_AttackNoEffect_13: 21300026
+      StormMage_AttackNoEffect_1: 21300002
+      StormMage_AttackNoEffect_0: 21300000
+      StormMage_AttackNoEffect_3: 21300006
+      StormMage_AttackNoEffect_7: 21300014
+      StormMage_AttackNoEffect_6: 21300012
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
