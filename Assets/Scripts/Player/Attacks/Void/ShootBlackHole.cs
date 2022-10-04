@@ -14,22 +14,32 @@ public class ShootBlackHole : MonoBehaviour
     [SerializeField] int inAirShotLimit = 2;
     float timeOfCast;
     int inAirShots = 0;
+
+    [Space]
+    [Header("Prefabs/Transforms")]
     [SerializeField] GameObject blackHole;
     [SerializeField] GameObject blackHoleExplosion;
-    [SerializeField] Transform bulletSpawner;
-    [SerializeField] AudioClip blackHoleShoot;
+    [SerializeField] GameObject player;
+
+    [Space]
+    [Header("Audio")]
+    [SerializeField] AudioClip[] blackHoleCharge;
+    [SerializeField] AudioClip[] blackHoleExplode;
+    Transform bulletSpawner;
     GameObject newBlackHole;
     Rigidbody2D newBlackHoleRB;
     Rigidbody2D playerRigidbody;
-    GlobalAudio globalAudio;
+    CapsuleCollider2D playerCollider;
+    AudioController audioController;
     Animator animator;
-    List<Rigidbody2D> nearbyEntities = new List<Rigidbody2D>();
     bool onCD = false;
 
     private void Start() {
-        animator = GetComponent<Animator>();
-        playerRigidbody = GetComponent<Rigidbody2D>();
-        globalAudio = FindObjectOfType<GlobalAudio>();
+        animator = player.GetComponent<Animator>();
+        playerRigidbody = player.GetComponent<Rigidbody2D>();
+        playerCollider = player.GetComponent<CapsuleCollider2D>();
+        audioController = GetComponentInParent<AudioController>();
+        bulletSpawner = transform.parent;
     }
 
     void Update() {
@@ -44,12 +54,22 @@ public class ShootBlackHole : MonoBehaviour
         }
         if (newBlackHoleRB)
         {
+            if (!Mouse.current.rightButton.IsPressed()) OnReleaseFire();
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             if (Vector2.Distance(newBlackHole.transform.position, mousePos) > 0.1f) 
             {
             newBlackHoleRB.velocity = new Vector2(mousePos.x - newBlackHole.transform.position.x, mousePos.y - newBlackHole.transform.position.y).normalized * projectileSpeed;
             }
             else newBlackHoleRB.velocity = Vector2.zero;
+
+
+            Collider2D[] nearbyEntities = Physics2D.OverlapCircleAll(newBlackHoleRB.position, newBlackHole.transform.localScale.x * 2, LayerMask.GetMask("Enemies"));
+            foreach (Collider2D e in nearbyEntities)
+            {
+                Rigidbody2D entity = e.GetComponent<Rigidbody2D>();
+                entity.GetComponent<EnemyMovement>().isBeingPulled = true;
+                entity.AddForce((newBlackHole.transform.position - entity.transform.position).normalized * Mathf.Max(thrust, (1 / thrust / Vector2.Distance(newBlackHole.transform.position, entity.transform.position))), ForceMode2D.Force);
+            }
         }
     }
 
@@ -57,7 +77,7 @@ public class ShootBlackHole : MonoBehaviour
     {
         if (onCD || PlayerMovement.isDead || inAirShots >= inAirShotLimit) return;
         timeOfCast = Time.time;
-        globalAudio.PlaySFX(blackHoleShoot, 0.5f);
+        audioController.PlaySFX(blackHoleCharge, 0.5f, true);
         animator.ResetTrigger("Release");
         animator.SetTrigger("Charge");
         animator.SetBool("isAttacking", true);
@@ -70,6 +90,8 @@ public class ShootBlackHole : MonoBehaviour
         if (onCD || inAirShots >= inAirShotLimit || !newBlackHole) return;
         animator.SetTrigger("Release");
         animator.SetBool("isAttacking", false);
+        audioController.StopSFX();
+        audioController.PlaySFX(blackHoleExplode);
         newBlackHole.GetComponent<Animator>().SetTrigger("Explode");
         if (Time.time - timeOfCast < 0.2f) {
             animator.SetTrigger("Jump");
@@ -77,15 +99,28 @@ public class ShootBlackHole : MonoBehaviour
             mousePos.z = 0;
             PlayerMovement.isBeingPulled = true;
             playerRigidbody.velocity = Vector2.zero;
-            playerRigidbody.AddForce((mousePos - transform.position).normalized * thrust, ForceMode2D.Impulse);
+            playerRigidbody.AddForce((mousePos - player.transform.position).normalized * thrust, ForceMode2D.Impulse);
         }
-        else {
-            foreach (Rigidbody2D entity in nearbyEntities)
+        else
+        {
+            Collider2D[] nearbyPlayer = Physics2D.OverlapCircleAll(newBlackHoleRB.position, newBlackHole.transform.localScale.x * 2, LayerMask.GetMask("Player"));
+            Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(newBlackHoleRB.position, newBlackHole.transform.localScale.x * 2, LayerMask.GetMask("Enemies"));
+            if (nearbyPlayer.Length != 0 && nearbyEnemies.Length == 0) 
             {
-                if (entity.gameObject.tag == "Player") PlayerMovement.isBeingPulled = true;
-                else entity.GetComponent<EnemyMovement>().isBeingPulled = true;
-                entity.AddForce((newBlackHole.transform.position - entity.transform.position).normalized * Mathf.Max(thrust, (1/ thrust / Vector2.Distance(newBlackHole.transform.position, entity.transform.position))), ForceMode2D.Impulse);
-
+                PlayerMovement.isBeingPulled = true;
+                playerRigidbody.AddForce((newBlackHole.transform.position - player.transform.position).normalized * Mathf.Max(thrust, (1/ thrust / Vector2.Distance(newBlackHole.transform.position, player.transform.position))), ForceMode2D.Impulse);
+            }
+            else if (nearbyPlayer.Length != 0 && nearbyEnemies.Length != 0)
+            {
+                Vector3 blackHolePos = newBlackHole.transform.position;
+                player.transform.position += new Vector3(blackHolePos.x - player.transform.position.x, blackHolePos.y - player.transform.position.y, 0) * 2;
+                float gravScale = playerRigidbody.gravityScale;
+                playerRigidbody.gravityScale = 0;
+                StartCoroutine(RestoreGravity(gravScale));
+                foreach (Collider2D enemy in nearbyEnemies)
+                {
+                    enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-1, 0);
+                }
             }
         }
 
@@ -97,12 +132,6 @@ public class ShootBlackHole : MonoBehaviour
         StartCoroutine(ShotCooldown());
     }
 
-    public void UpdateNearbyEntities(Rigidbody2D entity, bool isAdding)
-    {
-        if (isAdding) nearbyEntities.Add(entity);
-        else if (nearbyEntities.Contains(entity)) nearbyEntities.Remove(entity);
-    }
-
     IEnumerator ShrinkBlackhole(GameObject explosion)
     {
         while (explosion.transform.localScale.x > 0.1)
@@ -111,6 +140,12 @@ public class ShootBlackHole : MonoBehaviour
             explosion.transform.localScale *= 0.9f;
         }
         Destroy(explosion);
+    }
+
+    IEnumerator RestoreGravity(float scale)
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        playerRigidbody.gravityScale = scale;
     }
 
     IEnumerator ShotCooldown()

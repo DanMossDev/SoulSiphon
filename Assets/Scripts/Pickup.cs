@@ -5,13 +5,16 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     enum Options { 
-        Coin
+        Coin,
+        Fire,
+        Void,
+        Holy
     }
     [Header("Type of Pickup")]
     [SerializeField] Options options; 
     [Space]
     [Header("Audio")]
-    [SerializeField] AudioClip sfx;
+    [SerializeField] AudioClip[] sfx;
     CoinCounter coinCounter;
     GlobalAudio globalAudio;
 
@@ -25,6 +28,15 @@ public class Pickup : MonoBehaviour
         switch(options.ToString()) {
             case "Coin":
                 coinCounter.AddCoin();
+                break;
+            case "Fire":
+                GameSession.ChangeElement("fire");
+                break;
+            case "Void":
+                GameSession.ChangeElement("void");
+                break;
+            case "Holy":
+                GameSession.ChangeElement("holy");
                 break;
             default:
                 break;

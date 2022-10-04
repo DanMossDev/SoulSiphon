@@ -10,7 +10,7 @@ public class ProjectileDamage : MonoBehaviour
     [SerializeField] bool playerBullet = false; //Stops player from damaging themself
     [Space]
     [Header("Audio")]
-    [SerializeField] AudioClip bulletImpact;
+    [SerializeField] AudioClip[] bulletImpact;
 
     //Cached references
     GlobalAudio globalAudio;

@@ -6,7 +6,7 @@ public class EnemyDamageHandler : MonoBehaviour
 {
     [SerializeField] int enemyHP = 3;
     [SerializeField] float iTime = 0.15f;
-    [SerializeField] AudioClip enemyDamage;
+    [SerializeField] AudioClip[] enemyDamage;
     SpriteRenderer spriteRenderer;
     EnemyMovement enemyMovement;
     GlobalAudio globalAudio;

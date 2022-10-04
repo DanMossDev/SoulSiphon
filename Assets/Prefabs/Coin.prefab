@@ -117,7 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   options: 0
-  sfx: {fileID: 8300000, guid: b0eb4b60f03765e48849eaf74660f2aa, type: 3}
+  sfx:
+  - {fileID: 8300000, guid: b0eb4b60f03765e48849eaf74660f2aa, type: 3}
 --- !u!95 &1211932436247842924
 Animator:
   serializedVersion: 4

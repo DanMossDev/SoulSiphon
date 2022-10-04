@@ -10,15 +10,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpHeight = 5f;
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] float coyoteTime = 0.05f;
-    [SerializeField] float normalGravityScale = 5f;
+
     float lastPressedJump;
     float lastGroundedTime;
     float timeOfJump;
 
     [Space]
     [Header("Audio")]
-    [SerializeField] AudioClip jump;
-    [SerializeField] AudioClip grappleShoot;
+    [SerializeField] AudioClip[] jump;
 
     //Used for movement logic
     [HideInInspector] public static bool isDead = false; 
@@ -112,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        isBeingPulled = false;
+        if (other.collider.tag == "Ground") isBeingPulled = false;
     }
 
     IEnumerator CheckBeingPulled()

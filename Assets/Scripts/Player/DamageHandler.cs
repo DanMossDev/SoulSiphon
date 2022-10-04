@@ -10,7 +10,7 @@ public class DamageHandler : MonoBehaviour
     [SerializeField] float hitStunTime = 0.25f;
     [Space]
     [Header("Audio")]
-    [SerializeField] AudioClip playerDamage;
+    [SerializeField] AudioClip[] playerDamage;
 
     //Cached referenced
     GlobalAudio globalAudio;

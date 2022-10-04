@@ -21,7 +21,7 @@ public class Melee : MonoBehaviour
 
     [Space]
     [Header("Audio")]
-    [SerializeField] AudioClip swingSword;
+    [SerializeField] AudioClip[] swingSword;
     GlobalAudio globalAudio;
     Animator animator;
     

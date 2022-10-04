@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class GlobalAudio : MonoBehaviour
 {
-    AudioController audioController;
-    void Start()
-    {
-        audioController = GetComponent<AudioController>();
+    AudioSource audioSource;
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
     }
-
-    public void PlaySFX(AudioClip sfx, float volume = 1 )
+    public void PlaySFX(AudioClip[] sfx, float volume = 1)
     {
-        audioController.PlaySFX(sfx, volume);
+        audioSource.PlayOneShot(sfx[Random.Range(0, sfx.Length)], volume);
     }
-
     public void StopSFX()
     {
-        audioController.StopSFX();
+        audioSource.Stop();
     }
 }

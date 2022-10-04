@@ -262,7 +262,13 @@ MonoBehaviour:
   bulletDamage: 1
   bulletLife: 0
   playerBullet: 1
-  bulletImpact: {fileID: 8300000, guid: 1a2924b92f830f947872c6c36fdf0377, type: 3}
+  bulletImpact:
+  - {fileID: 8300000, guid: db513d0f147c8b04eae7ee15520b4137, type: 3}
+  - {fileID: 8300000, guid: e80f1f2ed525b9a47983aaa88b69e838, type: 3}
+  - {fileID: 8300000, guid: 10d348da3c90c4e4d978ad6b1efd7e91, type: 3}
+  - {fileID: 8300000, guid: 5a2941856c11f7845803ccf17445ce0a, type: 3}
+  - {fileID: 8300000, guid: 52415dc0b3716b14ca45b171d32eef7f, type: 3}
+  - {fileID: 8300000, guid: 88fd76b9ebe3e914cb4dd74276aa8b55, type: 3}
 --- !u!50 &8875950612942396816
 Rigidbody2D:
   serializedVersion: 4

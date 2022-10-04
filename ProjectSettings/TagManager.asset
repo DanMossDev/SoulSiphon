@@ -21,7 +21,7 @@ TagManager:
   - UI
   - Ground
   - Climbing
-  - Player
+  - PlayerLevel
   - Background
   - Bouncing
   - Enemies
@@ -31,8 +31,8 @@ TagManager:
   - Pickups
   - Exit
   - Sword
-  - 
-  - 
+  - Player
+  - Feet
   - 
   - 
   - 

@@ -13,11 +13,12 @@ public class ShootFireball : MonoBehaviour
     [Space]
     [Header("Prefabs and Game Objects")]
     [SerializeField] GameObject bullet;
-    [SerializeField] Transform bulletSpawner;
+    [SerializeField] Animator animator;
+    Transform bulletSpawner;
     [Space]
     [Header("Audio")]
-    [SerializeField] AudioClip drawBow;
-    [SerializeField] AudioClip releaseBow;
+    [SerializeField] AudioClip[] chargeFire;
+    [SerializeField] AudioClip[] shootFire;
 
     //Used for logic
     float bulletSpeed = 1f;
@@ -25,15 +26,14 @@ public class ShootFireball : MonoBehaviour
     bool isShooting = false;
     float angle;
     //Cached references
-    Animator animator;
     LineRenderer lineRenderer;
     AudioController audioController;
 
-    void Start() 
+    void OnEnable() 
     {
-        animator = GetComponent<Animator>();
         lineRenderer = GetComponent<LineRenderer>();
-        audioController = GetComponentInChildren<AudioController>();
+        audioController = GetComponentInParent<AudioController>();
+        bulletSpawner = transform.parent;
     }
 
 
@@ -55,19 +55,19 @@ public class ShootFireball : MonoBehaviour
         }
     }
 
-    void OnFire(InputValue value)
+    public void OnFire()
     {
         if (PlayerMovement.isDead || onCD) return;
         bulletSpeed = 0;
         lineRenderer.positionCount = 2000;
-        audioController.PlaySFX(drawBow);
+        audioController.PlaySFX(chargeFire, 0.5f);
         animator.ResetTrigger("Release");
         animator.SetTrigger("Charge");
         animator.SetBool("isAttacking", true);
         isShooting = true;
     }
 
-    void OnReleaseFire(InputValue value)
+    void OnReleaseFire()
     {
         lineRenderer.positionCount = 0;
         if (PlayerMovement.isDead || onCD || !isShooting) return;
@@ -77,7 +77,7 @@ public class ShootFireball : MonoBehaviour
         animator.SetTrigger("Release");
         animator.SetBool("isAttacking", false);
         audioController.StopSFX();
-        audioController.PlaySFX(releaseBow);
+        audioController.PlaySFX(shootFire);
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Rigidbody2D bulletRB = newBullet.GetComponent<Rigidbody2D>();
         bulletRB.velocity = new Vector2(mousePos.x - bulletSpawner.position.x, mousePos.y - bulletSpawner.position.y).normalized * bulletSpeed;

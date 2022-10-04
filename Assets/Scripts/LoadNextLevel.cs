@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LoadNextLevel : MonoBehaviour
 {
     [Header("Audio")]
-    [SerializeField] AudioClip levelComplete;
+    [SerializeField] AudioClip[] levelComplete;
     GlobalAudio globalAudio;
     bool isLoading = false;
     
