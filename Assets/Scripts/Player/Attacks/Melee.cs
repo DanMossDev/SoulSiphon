@@ -22,17 +22,15 @@ public class Melee : MonoBehaviour
     [Space]
     [Header("Audio")]
     [SerializeField] AudioClip[] swingSword;
-    GlobalAudio globalAudio;
     Animator animator;
     
     void Start() {
         animator = GetComponent<Animator>();
-        globalAudio = FindObjectOfType<GlobalAudio>();
     }
      void OnAttack(InputValue value)
     {
         if (PlayerMovement.isDead || onCD) return;
-        globalAudio.PlaySFX(swingSword);
+        GlobalAudio.PlaySFX(swingSword);
         animator.ResetTrigger("Release");
         animator.SetTrigger("Melee");
         onCD = true;

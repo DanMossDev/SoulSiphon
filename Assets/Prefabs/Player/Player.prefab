@@ -139,6 +139,7 @@ MonoBehaviour:
   inAirShotLimit: 2
   blackHole: {fileID: 2701533919028017038, guid: e662fc250b4586a4cb9f5ca11190b0d8, type: 3}
   blackHoleExplosion: {fileID: 7800995763969733500, guid: 0d9ee01f52c5b1c469f86ee57a6280ec, type: 3}
+  voidSlash: {fileID: 938599644115709625, guid: 285ebbc20dac7d2499e73ee1a456c042, type: 3}
   player: {fileID: 9137882635177260598}
   blackHoleCharge:
   - {fileID: 8300000, guid: 8ac79411f473aca41af8423847649d5d, type: 3}

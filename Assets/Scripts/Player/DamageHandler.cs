@@ -13,7 +13,6 @@ public class DamageHandler : MonoBehaviour
     [SerializeField] AudioClip[] playerDamage;
 
     //Cached referenced
-    GlobalAudio globalAudio;
     Animator animator;
     Rigidbody2D rigidBody;
 
@@ -23,7 +22,6 @@ public class DamageHandler : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        globalAudio = FindObjectOfType<GlobalAudio>();
     }
 
     void OnCollisionEnter2D(Collision2D other) {
@@ -47,7 +45,7 @@ public class DamageHandler : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        globalAudio.PlaySFX(playerDamage);
+        GlobalAudio.PlaySFX(playerDamage);
         animator.SetTrigger("Hurt");
         GameSession.currentHP += damage;
         if (GameSession.currentHP <= 0) {

@@ -19,6 +19,7 @@ public class ShootBlackHole : MonoBehaviour
     [Header("Prefabs/Transforms")]
     [SerializeField] GameObject blackHole;
     [SerializeField] GameObject blackHoleExplosion;
+    [SerializeField] GameObject voidSlash;
     [SerializeField] GameObject player;
 
     [Space]
@@ -116,10 +117,14 @@ public class ShootBlackHole : MonoBehaviour
                 player.transform.position += new Vector3(blackHolePos.x - player.transform.position.x, blackHolePos.y - player.transform.position.y, 0) * 2;
                 float gravScale = playerRigidbody.gravityScale;
                 playerRigidbody.gravityScale = 0;
+                PlayerMovement.hitStunned = true;
+                playerRigidbody.velocity = Vector2.zero;
                 StartCoroutine(RestoreGravity(gravScale));
                 foreach (Collider2D enemy in nearbyEnemies)
                 {
                     enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-1, 0);
+                    GameObject slash = Instantiate(voidSlash, enemy.transform);
+                    Destroy(slash, 1);
                 }
             }
         }
@@ -144,7 +149,8 @@ public class ShootBlackHole : MonoBehaviour
 
     IEnumerator RestoreGravity(float scale)
     {
-        yield return new WaitForSecondsRealtime(0.2f);
+        yield return new WaitForSecondsRealtime(0.5f);
+        PlayerMovement.hitStunned = false;
         playerRigidbody.gravityScale = scale;
     }
 

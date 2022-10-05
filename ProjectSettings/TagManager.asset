@@ -12,6 +12,7 @@ TagManager:
   - Ground
   - BlackHole
   - Sword
+  - GameManager
   layers:
   - Default
   - TransparentFX

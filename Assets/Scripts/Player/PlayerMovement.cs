@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     BoxCollider2D boxCollider;
     CapsuleCollider2D capsuleCollider;
-    GlobalAudio globalAudio;
 
 
     void Start()
@@ -39,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponentInChildren<BoxCollider2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
-        globalAudio = FindObjectOfType<GlobalAudio>();
 
         isDead = false;
         hitStunned = false;
@@ -80,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         if (isDead || Time.time - timeOfJump < 0.2f) return;
         lastPressedJump = Time.time;
         if (Time.time - lastGroundedTime <= coyoteTime) {
-            globalAudio.PlaySFX(jump);
+            GlobalAudio.PlaySFX(jump);
             animator.SetTrigger("Jump");
             rigidBody.velocity += Vector2.up * jumpHeight;
             timeOfJump = Time.time;

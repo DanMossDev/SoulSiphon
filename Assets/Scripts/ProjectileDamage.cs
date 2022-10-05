@@ -13,13 +13,11 @@ public class ProjectileDamage : MonoBehaviour
     [SerializeField] AudioClip[] bulletImpact;
 
     //Cached references
-    GlobalAudio globalAudio;
     BoxCollider2D boxCollider;
 
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        globalAudio = FindObjectOfType<GlobalAudio>();
     }
 
     void OnCollisionEnter2D(Collision2D other) {
@@ -27,7 +25,7 @@ public class ProjectileDamage : MonoBehaviour
         else if (other.collider.tag == "Player") other.collider.GetComponent<DamageHandler>().TakeDamage(-bulletDamage);
         else if (other.collider.tag == "Enemy" && playerBullet) other.collider.GetComponent<EnemyDamageHandler>().TakeDamage(-bulletDamage, (int)Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x));
         else {boxCollider.enabled = false;}
-        globalAudio.PlaySFX(bulletImpact);
+        GlobalAudio.PlaySFX(bulletImpact);
         Destroy(this.gameObject, bulletLife);
     }
 }

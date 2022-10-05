@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 6448915344165401301}
   - component: {fileID: 433171617}
   - component: {fileID: 433171619}
+  - component: {fileID: 1522156182}
+  - component: {fileID: 1522156183}
   m_Layer: 0
   m_Name: Game Manager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +45,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 0d204517d5dbd8149b73b9493d14b60f, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 651e21572705dfb48856e81f1d7de5dd, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1
@@ -139,5 +141,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61c6d6938cb963944ad19c5056ec8062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1522156182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6813136360349326032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2114eafb879763c4db6e9362ec7c6b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenu: {fileID: 8300000, guid: c0a400820d1f6094fa57b3998ab937bb, type: 3}
+  level1: {fileID: 8300000, guid: 651e21572705dfb48856e81f1d7de5dd, type: 3}
+  level2: {fileID: 0}
+  level3: {fileID: 0}
+--- !u!114 &1522156183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6813136360349326032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891c1dc1678a6404ea79cf4fa93cebba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

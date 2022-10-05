@@ -16,11 +16,9 @@ public class Pickup : MonoBehaviour
     [Header("Audio")]
     [SerializeField] AudioClip[] sfx;
     CoinCounter coinCounter;
-    GlobalAudio globalAudio;
 
     void Start() {
         coinCounter = FindObjectOfType<CoinCounter>();
-        globalAudio = FindObjectOfType<GlobalAudio>();
     }
     void OnTriggerEnter2D(Collider2D other) 
     {
@@ -41,7 +39,7 @@ public class Pickup : MonoBehaviour
             default:
                 break;
         }
-        globalAudio.PlaySFX(sfx);
+        GlobalAudio.PlaySFX(sfx);
         Destroy(this.gameObject);
     }
 }

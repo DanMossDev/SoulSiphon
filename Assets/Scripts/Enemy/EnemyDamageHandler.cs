@@ -9,19 +9,17 @@ public class EnemyDamageHandler : MonoBehaviour
     [SerializeField] AudioClip[] enemyDamage;
     SpriteRenderer spriteRenderer;
     EnemyMovement enemyMovement;
-    GlobalAudio globalAudio;
     bool isInvincible = false;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyMovement = GetComponent<EnemyMovement>();
-        globalAudio = FindObjectOfType<GlobalAudio>();
     }
 
     public void TakeDamage(int damage, int direction = 0)
     {
         if (isInvincible) return;
-        globalAudio.PlaySFX(enemyDamage);
+        GlobalAudio.PlaySFX(enemyDamage);
         enemyMovement.knockBack(direction);
         enemyHP += damage;
         if (enemyHP <= 0) enemyMovement.Die(direction);
