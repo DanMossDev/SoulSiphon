@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (isDead || Time.time - timeOfJump < 0.2f) return;
+        if (isDead || Time.time - timeOfJump < 0.2f || isBeingPulled) return;
         lastPressedJump = Time.time;
         if (Time.time - lastGroundedTime <= coyoteTime) {
             GlobalAudio.PlaySFX(jump);

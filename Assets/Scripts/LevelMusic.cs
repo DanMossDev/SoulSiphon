@@ -31,6 +31,8 @@ public class LevelMusic : MonoBehaviour
                 currentTrack = mainMenu;
                 break;
             case 2:
+            case 3:
+            case 4:
                 currentTrack = level1;
                 break;
             default: 

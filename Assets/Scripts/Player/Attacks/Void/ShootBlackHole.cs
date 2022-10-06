@@ -97,39 +97,31 @@ public class ShootBlackHole : MonoBehaviour
         audioController.StopSFX();
         audioController.PlaySFX(blackHoleExplode);
         newBlackHole.GetComponent<Animator>().SetTrigger("Explode");
-        if (Time.time - timeOfCast < 0.2f) {
-            animator.SetTrigger("Jump");
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            mousePos.z = 0;
-            PlayerMovement.isBeingPulled = true;
-            playerRigidbody.velocity = Vector2.zero;
-            playerRigidbody.AddForce((mousePos - player.transform.position).normalized * thrust, ForceMode2D.Impulse);
-        }
+        if (Time.time - timeOfCast < 0.2f) PullPlayer();
         else
         {
-            Collider2D[] nearbyPlayer = Physics2D.OverlapCircleAll(newBlackHoleRB.position, newBlackHole.transform.localScale.x * 2, LayerMask.GetMask("Player"));
+            bool nearbyPlayer = Physics2D.OverlapCircleAll(newBlackHoleRB.position, newBlackHole.transform.localScale.x * 2, LayerMask.GetMask("Player")).Length != 0;
             Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(newBlackHoleRB.position, newBlackHole.transform.localScale.x * 2, LayerMask.GetMask("Enemies"));
-            if (nearbyPlayer.Length != 0 && nearbyEnemies.Length == 0) 
+            if (nearbyPlayer)
             {
-                PlayerMovement.isBeingPulled = true;
-                playerRigidbody.AddForce((newBlackHole.transform.position - player.transform.position).normalized * Mathf.Max(thrust, (1/ thrust / Vector2.Distance(newBlackHole.transform.position, player.transform.position))), ForceMode2D.Impulse);
-            }
-            else if (nearbyPlayer.Length != 0 && nearbyEnemies.Length != 0)
-            {
-                Vector3 playerToBH = newBlackHole.transform.position - player.transform.position;
-                float playerToBHDistance = Vector2.Distance(newBlackHole.transform.position, player.transform.position);
-                RaycastHit2D raycast = Physics2D.Raycast(transform.position, playerToBH, playerToBHDistance * 2, LayerMask.GetMask("Ground"));
-                if (raycast.collider == null) player.transform.position += playerToBH * 2;
-                else player.transform.position = raycast.point + raycast.normal;
-                playerRigidbody.gravityScale = 0;
-                PlayerMovement.hitStunned = true;
-                playerRigidbody.velocity = Vector2.zero;
-                StartCoroutine(RestoreGravity());
-                foreach (Collider2D enemy in nearbyEnemies)
+                if (nearbyEnemies.Length == 0) PullPlayer();
+                else
                 {
-                    enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-1, 0);
-                    GameObject slash = Instantiate(voidSlash, enemy.transform);
-                    Destroy(slash, 1);
+                    Vector3 playerToBH = newBlackHole.transform.position - player.transform.position;
+                    float playerToBHDistance = Vector2.Distance(newBlackHole.transform.position, player.transform.position);
+                    RaycastHit2D raycast = Physics2D.Raycast(transform.position, playerToBH, playerToBHDistance * 2, LayerMask.GetMask("Ground"));
+                    if (raycast.collider == null) player.transform.position += playerToBH * 2;
+                    else player.transform.position = raycast.point + raycast.normal;
+                    playerRigidbody.gravityScale = 0;
+                    PlayerMovement.hitStunned = true;
+                    playerRigidbody.velocity = Vector2.zero;
+                    StartCoroutine(RestoreGravity());
+                    foreach (Collider2D enemy in nearbyEnemies)
+                    {
+                        enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-1, 0);
+                        GameObject slash = Instantiate(voidSlash, enemy.transform);
+                        Destroy(slash, 1);
+                    }
                 }
             }
         }
@@ -142,6 +134,15 @@ public class ShootBlackHole : MonoBehaviour
         StartCoroutine(ShotCooldown());
     }
 
+    void PullPlayer()
+    {
+        PlayerMovement.isBeingPulled = true;
+        animator.SetTrigger("Jump");
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        mousePos.z = 0;
+        playerRigidbody.velocity = Vector2.zero;
+        playerRigidbody.AddForce((mousePos - player.transform.position).normalized * thrust, ForceMode2D.Impulse);
+    }
     IEnumerator ShrinkBlackhole(GameObject explosion)
     {
         while (explosion.transform.localScale.x > 0.1)

@@ -10,11 +10,6 @@ public class UpdateSoulText : MonoBehaviour
     {
         text = GetComponent<TextMeshProUGUI>();
         text.text = "This will replace your " + GameSession.playerElement + " soul";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (GameSession.playerElement == "wind") text.text = "";
     }
 }
