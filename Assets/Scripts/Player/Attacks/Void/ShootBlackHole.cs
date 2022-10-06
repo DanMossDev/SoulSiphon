@@ -28,11 +28,13 @@ public class ShootBlackHole : MonoBehaviour
     [SerializeField] AudioClip[] blackHoleExplode;
     Transform bulletSpawner;
     GameObject newBlackHole;
+    GameObject explosion;
     Rigidbody2D newBlackHoleRB;
     Rigidbody2D playerRigidbody;
     CapsuleCollider2D playerCollider;
     AudioController audioController;
     Animator animator;
+    float gravScale;
     bool onCD = false;
 
     private void Start() {
@@ -41,6 +43,7 @@ public class ShootBlackHole : MonoBehaviour
         playerCollider = player.GetComponent<CapsuleCollider2D>();
         audioController = GetComponentInParent<AudioController>();
         bulletSpawner = transform.parent;
+        gravScale = playerRigidbody.gravityScale;
     }
 
     void Update() {
@@ -113,13 +116,15 @@ public class ShootBlackHole : MonoBehaviour
             }
             else if (nearbyPlayer.Length != 0 && nearbyEnemies.Length != 0)
             {
-                Vector3 blackHolePos = newBlackHole.transform.position;
-                player.transform.position += new Vector3(blackHolePos.x - player.transform.position.x, blackHolePos.y - player.transform.position.y, 0) * 2;
-                float gravScale = playerRigidbody.gravityScale;
+                Vector3 playerToBH = newBlackHole.transform.position - player.transform.position;
+                float playerToBHDistance = Vector2.Distance(newBlackHole.transform.position, player.transform.position);
+                RaycastHit2D raycast = Physics2D.Raycast(transform.position, playerToBH, playerToBHDistance * 2, LayerMask.GetMask("Ground"));
+                if (raycast.collider == null) player.transform.position += playerToBH * 2;
+                else player.transform.position = raycast.point + raycast.normal;
                 playerRigidbody.gravityScale = 0;
                 PlayerMovement.hitStunned = true;
                 playerRigidbody.velocity = Vector2.zero;
-                StartCoroutine(RestoreGravity(gravScale));
+                StartCoroutine(RestoreGravity());
                 foreach (Collider2D enemy in nearbyEnemies)
                 {
                     enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-1, 0);
@@ -131,7 +136,7 @@ public class ShootBlackHole : MonoBehaviour
 
         onCD = true;
         inAirShots++;
-        GameObject explosion = Instantiate(blackHoleExplosion, newBlackHole.transform.position, Quaternion.identity);
+        explosion = Instantiate(blackHoleExplosion, newBlackHole.transform.position, Quaternion.identity);
         StartCoroutine(ShrinkBlackhole(explosion));
         Destroy(newBlackHole);
         StartCoroutine(ShotCooldown());
@@ -147,16 +152,23 @@ public class ShootBlackHole : MonoBehaviour
         Destroy(explosion);
     }
 
-    IEnumerator RestoreGravity(float scale)
+    IEnumerator RestoreGravity()
     {
         yield return new WaitForSecondsRealtime(0.5f);
         PlayerMovement.hitStunned = false;
-        playerRigidbody.gravityScale = scale;
+        playerRigidbody.gravityScale = gravScale;
     }
 
     IEnumerator ShotCooldown()
     {
         yield return new WaitForSeconds(shotCD);
         onCD = false;
+    }
+
+    private void OnDisable() {
+        if (newBlackHole) Destroy(newBlackHole);
+        if (explosion) Destroy(explosion);
+        playerRigidbody.gravityScale = gravScale;
+        PlayerMovement.hitStunned = false;
     }
 }

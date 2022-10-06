@@ -24,8 +24,6 @@ public class ProjectileDamage : MonoBehaviour
         if (other.collider.tag == "Player" && playerBullet) return;
         else if (other.collider.tag == "Player") other.collider.GetComponent<DamageHandler>().TakeDamage(-bulletDamage);
         else if (other.collider.tag == "Enemy" && playerBullet) other.collider.GetComponent<EnemyDamageHandler>().TakeDamage(-bulletDamage, (int)Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x));
-        else {boxCollider.enabled = false;}
         GlobalAudio.PlaySFX(bulletImpact);
-        Destroy(this.gameObject, bulletLife);
     }
 }
