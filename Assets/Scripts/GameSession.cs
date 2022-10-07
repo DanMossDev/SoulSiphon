@@ -8,7 +8,7 @@ public class GameSession : MonoBehaviour
     public static int maxHP = 3;
     public static int currentHP = maxHP;
     public static int score = 0;
-    public static string playerElement = "wind";
+    public static string playerElement = "void";
 
     public delegate void ElementChange();
     public static event ElementChange OnChangeElement;

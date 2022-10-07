@@ -12,6 +12,7 @@ public class ShootBlackHole : MonoBehaviour
     [SerializeField] float projectileSpeed = 5f;
     [SerializeField] float thrust = 10f;
     [SerializeField] int inAirShotLimit = 2;
+    [SerializeField] int slashDamage = 1;
     float timeOfCast;
     int inAirShots = 0;
 
@@ -71,7 +72,7 @@ public class ShootBlackHole : MonoBehaviour
             foreach (Collider2D e in nearbyEntities)
             {
                 Rigidbody2D entity = e.GetComponent<Rigidbody2D>();
-                entity.GetComponent<EnemyMovement>().isBeingPulled = true;
+                entity.GetComponent<EnemyState>().isBeingPulled = true;
                 entity.AddForce((newBlackHole.transform.position - entity.transform.position).normalized * Mathf.Max(thrust, (1 / thrust / Vector2.Distance(newBlackHole.transform.position, entity.transform.position))), ForceMode2D.Force);
             }
         }
@@ -118,7 +119,7 @@ public class ShootBlackHole : MonoBehaviour
                     StartCoroutine(RestoreGravity());
                     foreach (Collider2D enemy in nearbyEnemies)
                     {
-                        enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-1, 0);
+                        enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-slashDamage, Vector2.zero);
                         GameObject slash = Instantiate(voidSlash, enemy.transform);
                         Destroy(slash, 1);
                     }

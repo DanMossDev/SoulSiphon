@@ -20,7 +20,7 @@ public class FirePitDamage : MonoBehaviour
             Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(transform.position, new Vector2(2, -2f), 0, enemyLayer);
             foreach(Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-damagePerSecond);
+                enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-damagePerSecond, Vector2.zero);
             }
             numOfTicks--;
         }

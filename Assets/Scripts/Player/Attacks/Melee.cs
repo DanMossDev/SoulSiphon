@@ -40,7 +40,7 @@ public class Melee : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-damage, (int)Mathf.Sign(enemy.transform.position.x - transform.position.x));
+            enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-damage, new Vector2(enemy.transform.position.x - transform.position.x, 1).normalized);
             Rigidbody2D enemyRB = enemy.GetComponent<Rigidbody2D>();
         }
         Destroy(newSword, 0.15f);

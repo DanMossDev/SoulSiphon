@@ -7,30 +7,51 @@ public class EnemyDamageHandler : MonoBehaviour
     [SerializeField] int enemyHP = 3;
     [SerializeField] float iTime = 0.15f;
     [SerializeField] AudioClip[] enemyDamage;
+    Rigidbody2D rigidBody;
+    Animator animator;
     SpriteRenderer spriteRenderer;
-    EnemyMovement enemyMovement;
     bool isInvincible = false;
+
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        enemyMovement = GetComponent<EnemyMovement>();
+        rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
     }
 
-    public void TakeDamage(int damage, int direction = 0)
+    public void TakeDamage(int damage, Vector2 direction)
     {
         if (isInvincible) return;
         GlobalAudio.PlaySFX(enemyDamage);
-        enemyMovement.knockBack(direction);
+        knockBack(direction);
         enemyHP += damage;
-        if (enemyHP <= 0) enemyMovement.Die(direction);
+        if (enemyHP <= 0) Die(direction);
         isInvincible = true;
         StartCoroutine(InvincibilityFrames());
+    }
+
+    void knockBack(Vector2 direction)
+    {
+        //isBeingPulled = true;
+        rigidBody.velocity = direction * 2;
+    }
+
+    void Die(Vector2 direction)
+    {
+        // isBeingPulled = true;
+        rigidBody.velocity = direction * 3;
+        animator.SetTrigger("Die");
+        GetComponent<DealDamage>().SetDamage(0);
+        Destroy(gameObject, 0.2f);
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.tag == "Hazard") Die(Vector2.zero);
     }
 
     IEnumerator InvincibilityFrames()
     {
         yield return new WaitForSeconds(iTime);
         isInvincible = false;
-        spriteRenderer.color = Color.white;
     }
 }

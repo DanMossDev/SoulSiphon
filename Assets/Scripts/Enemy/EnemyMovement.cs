@@ -8,18 +8,18 @@ public class EnemyMovement : MonoBehaviour
     Rigidbody2D rigidBody;
     BoxCollider2D boxCollider;
     Animator animator;
-    public bool isBeingPulled;
-    bool hitStunned = false;
+    EnemyState state;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        state = GetComponent<EnemyState>();
     }
 
     void Update()
     {
-        if (!isBeingPulled) rigidBody.velocity = new Vector2(moveSpeed, rigidBody.velocity.y);
+        if (!state.isBeingPulled) rigidBody.AddForce(new Vector2(moveSpeed, rigidBody.velocity.y));
     }
 
     void OnTriggerExit2D(Collider2D other) {
@@ -28,31 +28,17 @@ public class EnemyMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if ((other.tag == "Enemy")) turnAround();
-        if (other.tag == "Hazard") Die(0);
     }
 
     void turnAround()
     {
+        if (state.isBeingPulled) return;
+        rigidBody.velocity *= -1;
         moveSpeed *= -1;
         transform.localScale = new Vector2(transform.localScale.x * -1, 1f);
     }
 
-    public void knockBack(int direction)
-    {
-        isBeingPulled = true;
-        rigidBody.velocity = new Vector2(direction * 2, 1);
-    }
-
     void OnCollisionEnter2D(Collision2D other) {
-        if (other.collider.tag == "Ground") isBeingPulled = false;
-    }
-
-    public void Die(int direction)
-    {
-        isBeingPulled = true;
-        rigidBody.velocity = new Vector2(direction * 3, 5);
-        animator.SetTrigger("Die");
-        GetComponent<DealDamage>().SetDamage(0);
-        Destroy(gameObject, 0.2f);
+        if (other.collider.tag == "Ground") state.isBeingPulled = false;
     }
 }

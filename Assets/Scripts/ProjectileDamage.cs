@@ -23,7 +23,7 @@ public class ProjectileDamage : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         if (other.collider.tag == "Player" && playerBullet) return;
         else if (other.collider.tag == "Player") other.collider.GetComponent<DamageHandler>().TakeDamage(-bulletDamage);
-        else if (other.collider.tag == "Enemy" && playerBullet) other.collider.GetComponent<EnemyDamageHandler>().TakeDamage(-bulletDamage, (int)Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x));
+        else if (other.collider.tag == "Enemy" && playerBullet) other.collider.GetComponent<EnemyDamageHandler>().TakeDamage(-bulletDamage, new Vector2(other.collider.transform.position.x - transform.position.x, other.collider.transform.position.y - transform.position.y).normalized);
         GlobalAudio.PlaySFX(bulletImpact);
     }
 }
