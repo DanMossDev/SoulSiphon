@@ -5,13 +5,19 @@ using Pathfinding;
 
 public class FlyingAI : MonoBehaviour
 {
+    [Space]
+    [Header("Pathfinding Settings")]
     [SerializeField] Transform target;
     [SerializeField] float speed = 200f;
     [SerializeField] float nextWaypointDist = 3f;
+    [SerializeField] float aggroRange = 5;
+    [SerializeField] Transform[] patrolPoints;
     EnemyState state;
     Transform graphics;
+    Vector3 destination;
     Path path;
     int currentWaypoint = 0;
+    int nextPoint = 0;
     bool reachedDestination = false;
 
     Seeker seeker;
@@ -28,7 +34,8 @@ public class FlyingAI : MonoBehaviour
 
     void UpdatePath()
     {
-        if (seeker.IsDone()) seeker.StartPath(transform.position, target.position, OnPathComplete);
+        destination = state.playerInRange ? target.position : patrolPoints[nextPoint].position;
+        if (seeker.IsDone()) seeker.StartPath(transform.position, destination, OnPathComplete);
     }
 
     void OnPathComplete(Path currentPath)
@@ -40,18 +47,33 @@ public class FlyingAI : MonoBehaviour
         }
     }
 
+    void NextPoint()
+    {
+        if (seeker.IsDone()) {
+            if (nextPoint < patrolPoints.Length - 1) nextPoint++;
+            else nextPoint = 0;
+        }
+    }
+
+    void Update() 
+    {
+        if (!state.playerInRange && Physics2D.OverlapCircleAll(transform.position, aggroRange, LayerMask.GetMask("Player")).Length > 0) state.playerInRange = true;
+        if (state.playerInRange && Physics2D.OverlapCircleAll(transform.position, aggroRange * 2, LayerMask.GetMask("Player")).Length == 0) state.playerInRange = false;
+    }
+
     void FixedUpdate()
     {
+        print(nextPoint);
         if (path == null) return;
         if (currentWaypoint >= path.vectorPath.Count)
         {
+            NextPoint();
             reachedDestination = true;
             return;
         } else reachedDestination = false;
-        if (state.isBeingPulled) {
-            state.isBeingPulled = false;
-            return;
-        }
+
+        if (state.isBeingPulled) {state.isBeingPulled = false; return;}
+
         Vector2 direction = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         rigidBody.AddForce(direction * speed * Time.deltaTime);
 
@@ -59,8 +81,8 @@ public class FlyingAI : MonoBehaviour
 
         if (distance < nextWaypointDist) currentWaypoint++;
 
-        if (transform.position.x - target.position.x <= Mathf.Epsilon) graphics.localScale = new Vector3(-1, 1, 1);
-        else if (transform.position.x - target.position.x >= -Mathf.Epsilon) graphics.localScale = new Vector3(1, 1, 1);
+        if (transform.position.x - destination.x <= Mathf.Epsilon) graphics.localScale = new Vector3(-1, 1, 1);
+        else if (transform.position.x - destination.x >= -Mathf.Epsilon) graphics.localScale = new Vector3(1, 1, 1);
     }
 
     public void knockBack(Vector2 direction)
