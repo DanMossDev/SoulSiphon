@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         boxCollider = GetComponentInChildren<BoxCollider2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
 

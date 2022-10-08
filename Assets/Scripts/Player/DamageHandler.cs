@@ -21,7 +21,7 @@ public class DamageHandler : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void OnCollisionEnter2D(Collision2D other) {

@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHP: 3
-  iTime: 0
+  iTime: 0.18
   enemyDamage:
   - {fileID: 8300000, guid: e036fd1abfa7be74882358c6a20738d7, type: 3}
 --- !u!114 &1445740534871654892
@@ -247,7 +247,7 @@ MonoBehaviour:
   - {x: -0.37550354, y: -0.2627492, z: 0}
   m_ShapePathHash: 2092836231
   m_Mesh: {fileID: 0}
-  m_InstanceId: 99960
+  m_InstanceId: 95268
 --- !u!114 &3806865601438431240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,3 +262,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBeingPulled: 0
   hitStunned: 0
+  playerInRange: 0

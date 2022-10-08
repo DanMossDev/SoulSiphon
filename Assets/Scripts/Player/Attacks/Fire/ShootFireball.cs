@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class ShootFireball : MonoBehaviour
 {
     [Header("Game Feel")]
+    [Tooltip("Max speed of the bullet")]
     [SerializeField] float maxBulletSpeed = 5f;
     [SerializeField] float bulletChargeSpeed = 3f;
     [SerializeField] float shotCD = 0.5f;
@@ -13,6 +14,7 @@ public class ShootFireball : MonoBehaviour
     [Space]
     [Header("Prefabs and Game Objects")]
     [SerializeField] GameObject bullet;
+    [SerializeField] float prefabOffset = 90;
     [SerializeField] Animator animator;
     Transform bulletSpawner;
     [Space]
@@ -40,7 +42,6 @@ public class ShootFireball : MonoBehaviour
     void FixedUpdate() {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         angle = Mathf.Rad2Deg * Mathf.Atan2(bulletSpawner.position.x - mousePos.x, mousePos.y - bulletSpawner.position.y);
-        bulletSpawner.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         if (isShooting) {
             if (PlayerMovement.isDead) {lineRenderer.positionCount = 0; return;}
@@ -67,11 +68,12 @@ public class ShootFireball : MonoBehaviour
         isShooting = true;
     }
 
+
     void OnReleaseFire()
     {
         lineRenderer.positionCount = 0;
         if (PlayerMovement.isDead || onCD || !isShooting) return;
-        GameObject newBullet = Instantiate(bullet, bulletSpawner.position, Quaternion.Euler(0, 0, angle + 90));
+        GameObject newBullet = Instantiate(bullet, bulletSpawner.position, Quaternion.Euler(0, 0, angle + prefabOffset));
         onCD = true;
         isShooting = false;
         animator.SetTrigger("Release");

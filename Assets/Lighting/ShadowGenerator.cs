@@ -5,18 +5,16 @@ using UnityEngine.Rendering.Universal;
  
 public static class ShadowCaster2DExtensions
 {
+    /// <param name="shadowCaster">The object to modify.</param>
+    /// <param name="path">The new path to define the shape of the shadow caster.</param>
     public static void SetPath(this ShadowCaster2D shadowCaster, Vector3[] path)
     {
-        FieldInfo shapeField = typeof(ShadowCaster2D).GetField("m_ShapePath",
-                                                               BindingFlags.NonPublic |
-                                                               BindingFlags.Instance);
+        FieldInfo shapeField = typeof(ShadowCaster2D).GetField("m_ShapePath", BindingFlags.NonPublic | BindingFlags.Instance);
         shapeField.SetValue(shadowCaster, path);
     }
     public static void SetPathHash(this ShadowCaster2D shadowCaster, int hash)
     {
-        FieldInfo hashField = typeof(ShadowCaster2D).GetField("m_ShapePathHash",
-                                                              BindingFlags.NonPublic |
-                                                              BindingFlags.Instance);
+        FieldInfo hashField = typeof(ShadowCaster2D).GetField("m_ShapePathHash", BindingFlags.NonPublic | BindingFlags.Instance);
         hashField.SetValue(shadowCaster, hash);
     } 
 }
@@ -31,10 +29,7 @@ public class ShadowGenerator
     {
         CompositeCollider2D[] colliders = GameObject.FindObjectsOfType<CompositeCollider2D>();
  
-        for(int i = 0; i < colliders.Length; ++i)
-        {
-            GenerateTilemapShadowCastersInEditor(colliders[i], false);
-        }
+        foreach (CompositeCollider2D collider in colliders) GenerateTilemapShadowCasterInEditor(collider, false);
     }
  
     [UnityEditor.MenuItem("Generate Shadow Casters (Self Shadows)", menuItem = "Tools/Generate Shadow Casters (Self Shadows)")]
@@ -42,40 +37,47 @@ public class ShadowGenerator
     {
         CompositeCollider2D[] colliders = GameObject.FindObjectsOfType<CompositeCollider2D>();
  
-        for (int i = 0; i < colliders.Length; ++i)
-        {
-            GenerateTilemapShadowCastersInEditor(colliders[i], true);
-        }
+        foreach (CompositeCollider2D collider in colliders) GenerateTilemapShadowCasterInEditor(collider, true);
     }
  
-    public static void GenerateTilemapShadowCastersInEditor(CompositeCollider2D collider, bool selfShadows)
+    public static void GenerateTilemapShadowCasterInEditor(CompositeCollider2D collider, bool selfShadows)
     {
-        GenerateTilemapShadowCasters(collider, selfShadows);
+        GenerateTilemapShadowCaster(collider, selfShadows);
  
+        UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+    }
+
+    [UnityEditor.MenuItem("Destroy All Shadow Casters", menuItem = "Tools/Destroy All Shadow Casters")]
+    public static void DestroyShadowCasters()
+    {
+        CompositeCollider2D[] colliders = GameObject.FindObjectsOfType<CompositeCollider2D>();
+ 
+        foreach (CompositeCollider2D collider in colliders) 
+        {
+            ShadowCaster2D[] currentShadows = collider.GetComponentsInChildren<ShadowCaster2D>();
+            foreach (ShadowCaster2D shadowCaster in currentShadows) GameObject.DestroyImmediate(shadowCaster.gameObject);
+        }
+
         UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
     }
  
 #endif
 
-    public static void GenerateTilemapShadowCasters(CompositeCollider2D collider, bool selfShadows)
+    public static void GenerateTilemapShadowCaster(CompositeCollider2D collider, bool selfShadows)
     {
-        ShadowCaster2D[] existingShadowCasters = collider.GetComponentsInChildren<ShadowCaster2D>();
+        ShadowCaster2D[] currentShadows = collider.GetComponentsInChildren<ShadowCaster2D>();
  
-        for (int i = 0; i < existingShadowCasters.Length; ++i)
+        foreach (ShadowCaster2D shadowCaster in currentShadows)
         {
-            if(existingShadowCasters[i].transform.parent != collider.transform)
-            {
-                continue;
-            }
- 
-            GameObject.DestroyImmediate(existingShadowCasters[i].gameObject);
+            if(shadowCaster.transform.parent != collider.transform) continue;
+            GameObject.DestroyImmediate(shadowCaster.gameObject);
         }
  
         int pathCount = collider.pathCount;
         List<Vector2> pointsInPath = new List<Vector2>();
         List<Vector3> pointsInPath3D = new List<Vector3>();
  
-        for (int i = 0; i < pathCount; ++i)
+        for (int i = 0; i < pathCount; i++)
         {
             collider.GetPath(i, pointsInPath);
  
@@ -83,10 +85,7 @@ public class ShadowGenerator
             newShadowCaster.isStatic = true;
             newShadowCaster.transform.SetParent(collider.transform, false);
  
-            for(int j = 0; j < pointsInPath.Count; ++j)
-            {
-                pointsInPath3D.Add(pointsInPath[j]);
-            }
+            for(int j = 0; j < pointsInPath.Count; j++) pointsInPath3D.Add(pointsInPath[j]);
  
             ShadowCaster2D component = newShadowCaster.AddComponent<ShadowCaster2D>();
             component.SetPath(pointsInPath3D.ToArray());

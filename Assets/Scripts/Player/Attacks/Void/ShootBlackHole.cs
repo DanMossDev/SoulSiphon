@@ -39,7 +39,7 @@ public class ShootBlackHole : MonoBehaviour
     bool onCD = false;
 
     private void Start() {
-        animator = player.GetComponent<Animator>();
+        animator = player.GetComponentInChildren<Animator>();
         playerRigidbody = player.GetComponent<Rigidbody2D>();
         playerCollider = player.GetComponent<CapsuleCollider2D>();
         audioController = GetComponentInParent<AudioController>();
@@ -85,7 +85,6 @@ public class ShootBlackHole : MonoBehaviour
         audioController.PlaySFX(blackHoleCharge, 0.5f, true);
         animator.ResetTrigger("Release");
         animator.SetTrigger("Charge");
-        animator.SetBool("isAttacking", true);
         newBlackHole = Instantiate(blackHole, bulletSpawner.position, Quaternion.identity);
         newBlackHoleRB = newBlackHole.GetComponent<Rigidbody2D>();
     }
@@ -93,8 +92,6 @@ public class ShootBlackHole : MonoBehaviour
     public void OnReleaseFire()
     {
         if (onCD || inAirShots >= inAirShotLimit || !newBlackHole) return;
-        animator.SetTrigger("Release");
-        animator.SetBool("isAttacking", false);
         audioController.StopSFX();
         audioController.PlaySFX(blackHoleExplode);
         newBlackHole.GetComponent<Animator>().SetTrigger("Explode");
@@ -108,6 +105,8 @@ public class ShootBlackHole : MonoBehaviour
                 if (nearbyEnemies.Length == 0) PullPlayer();
                 else
                 {
+                    animator.SetTrigger("Special");
+                    
                     Vector3 playerToBH = newBlackHole.transform.position - player.transform.position;
                     float playerToBHDistance = Vector2.Distance(newBlackHole.transform.position, player.transform.position);
                     RaycastHit2D raycast = Physics2D.Raycast(transform.position, playerToBH, playerToBHDistance * 2, LayerMask.GetMask("Ground"));
@@ -124,7 +123,7 @@ public class ShootBlackHole : MonoBehaviour
                         Destroy(slash, 1);
                     }
                 }
-            }
+            } else animator.SetTrigger("Release");
         }
 
         onCD = true;
@@ -165,6 +164,12 @@ public class ShootBlackHole : MonoBehaviour
     {
         yield return new WaitForSeconds(shotCD);
         onCD = false;
+    }
+
+    IEnumerator WaitBriefly()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        print("Hello");
     }
 
     private void OnDisable() {
