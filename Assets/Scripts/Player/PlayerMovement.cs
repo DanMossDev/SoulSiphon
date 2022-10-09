@@ -6,9 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Basic Movement")]
-    [SerializeField] float moveSpeed = 10f;
-    [SerializeField] float jumpHeight = 5f;
-    [SerializeField] float climbSpeed = 5f;
     [SerializeField] float coyoteTime = 0.05f;
 
     float lastPressedJump;
@@ -80,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         if (Time.time - lastGroundedTime <= coyoteTime) {
             GlobalAudio.PlaySFX(jump);
             animator.SetTrigger("Jump");
-            rigidBody.velocity += Vector2.up * jumpHeight;
+            rigidBody.velocity += Vector2.up * PlayerStats.jumpHeight;
             timeOfJump = Time.time;
         }
     }
@@ -88,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
-        Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, rigidBody.velocity.y);
+        Vector2 playerVelocity = new Vector2(moveInput.x * PlayerStats.moveSpeed, rigidBody.velocity.y);
         if (isBeingPulled) rigidBody.AddForce(new Vector2(playerVelocity.x * 2, 0));
         else rigidBody.velocity = playerVelocity;
     }

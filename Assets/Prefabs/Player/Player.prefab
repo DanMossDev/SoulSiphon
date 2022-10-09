@@ -257,11 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07cc1fb849837ca4282802a0b9633855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotCD: 0.5
-  projectileSpeed: 10
   thrust: 20
   inAirShotLimit: 2
-  slashDamage: 1
   blackHole: {fileID: 2701533919028017038, guid: e662fc250b4586a4cb9f5ca11190b0d8, type: 3}
   blackHoleExplosion: {fileID: 7800995763969733500, guid: 0d9ee01f52c5b1c469f86ee57a6280ec, type: 3}
   voidSlash: {fileID: 938599644115709625, guid: 285ebbc20dac7d2499e73ee1a456c042, type: 3}
@@ -468,9 +465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4903d388d0b492c48adb478ce35b6ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBulletSpeed: 24
-  bulletChargeSpeed: 10
-  shotCD: 0.5
   turnRate: 150
   bullet: {fileID: 2701533919028017038, guid: 63e945d48eb9e68488ee67c78e47d533, type: 3}
   prefabOffset: 90
@@ -930,9 +924,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1785b2b3630cd274d8c7eb7831c7d01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
-  jumpHeight: 15.5
-  climbSpeed: 5
   coyoteTime: 0.15
   jump:
   - {fileID: 8300000, guid: 8ca311089e736594f887cb79797d302c, type: 3}
@@ -977,9 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f9ba6ce9ca84944bcb8269d3f19876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  cd: 0.2
-  attackRange: 2.3
+  attackRange: 2.5
   swordSpawn: {fileID: 3834757635753673571}
   hitboxSpawn: {fileID: 3274354714207194822}
   enemyLayer:

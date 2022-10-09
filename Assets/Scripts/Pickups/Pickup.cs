@@ -8,24 +8,22 @@ public class Pickup : MonoBehaviour
         Coin,
         Fire,
         Void,
-        Holy
+        Holy,
+        Item
     }
     [Header("Type of Pickup")]
     [SerializeField] Options options; 
     [Space]
     [Header("Audio")]
     [SerializeField] AudioClip[] sfx;
-    CoinCounter coinCounter;
 
-    void Start() {
-        coinCounter = FindObjectOfType<CoinCounter>();
-    }
+
     void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.tag != "Player") return;
         switch(options.ToString()) {
             case "Coin":
-                coinCounter.AddCoin();
+                FindObjectOfType<CoinCounter>().AddCoin();
                 break;
             case "Fire":
                 PlayerStats.ChangeElement("fire");
@@ -35,6 +33,9 @@ public class Pickup : MonoBehaviour
                 break;
             case "Holy":
                 PlayerStats.ChangeElement("holy");
+                break;
+            case "Item":
+                GetComponent<StatItem>().UpdateStats();
                 break;
             default:
                 break;

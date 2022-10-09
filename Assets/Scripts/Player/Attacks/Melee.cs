@@ -45,7 +45,7 @@ public class Melee : MonoBehaviour
 
     void DetectEnemies()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(hitboxSpawn.position, new Vector2(attackRange, 1f), 0, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(hitboxSpawn.position, new Vector2(attackRange, 0.8f), 0, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-PlayerStats.meleeDamage, new Vector2(enemy.transform.position.x - transform.position.x, 1).normalized);
@@ -54,7 +54,7 @@ public class Melee : MonoBehaviour
     }
 
     private void OnDrawGizmosSelected() {
-        Gizmos.DrawWireCube(hitboxSpawn.position, new Vector2(attackRange, 1f));
+        Gizmos.DrawWireCube(hitboxSpawn.position, new Vector2(attackRange, 0.8f));
     }
 
     IEnumerator AttackCooldown()
