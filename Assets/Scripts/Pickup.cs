@@ -28,13 +28,13 @@ public class Pickup : MonoBehaviour
                 coinCounter.AddCoin();
                 break;
             case "Fire":
-                GameSession.ChangeElement("fire");
+                PlayerStats.ChangeElement("fire");
                 break;
             case "Void":
-                GameSession.ChangeElement("void");
+                PlayerStats.ChangeElement("void");
                 break;
             case "Holy":
-                GameSession.ChangeElement("holy");
+                PlayerStats.ChangeElement("holy");
                 break;
             default:
                 break;

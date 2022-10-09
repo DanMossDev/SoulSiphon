@@ -47,10 +47,10 @@ public class DamageHandler : MonoBehaviour
     {
         GlobalAudio.PlaySFX(playerDamage);
         animator.SetTrigger("Hurt");
-        GameSession.currentHP += damage;
-        if (GameSession.currentHP <= 0) {
+        PlayerStats.currentHP += damage;
+        if (PlayerStats.currentHP <= 0) {
             Die();
-            GameSession.InitHP();
+            PlayerStats.InitHP();
         }
         isInvincible = true;
         StartCoroutine(InvincibilityFrames());

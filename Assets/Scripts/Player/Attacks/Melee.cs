@@ -7,8 +7,6 @@ public class Melee : MonoBehaviour
 {
     [Space]
     [Header("Melee Options")]
-    [SerializeField] int damage = 1;
-    [SerializeField] float cd = 0.2f;
     [SerializeField] float attackRange;
     bool onCD = false;
     float timeAttacked;
@@ -50,7 +48,7 @@ public class Melee : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(hitboxSpawn.position, new Vector2(attackRange, 1f), 0, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-damage, new Vector2(enemy.transform.position.x - transform.position.x, 1).normalized);
+            enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-PlayerStats.meleeDamage, new Vector2(enemy.transform.position.x - transform.position.x, 1).normalized);
             Rigidbody2D enemyRB = enemy.GetComponent<Rigidbody2D>();
         }
     }
@@ -61,7 +59,7 @@ public class Melee : MonoBehaviour
 
     IEnumerator AttackCooldown()
     {
-        yield return new WaitForSeconds(cd);
+        yield return new WaitForSeconds(PlayerStats.meleeAttackRate);
         onCD = false;
     }
 }

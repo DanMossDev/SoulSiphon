@@ -8,11 +8,8 @@ public class ShootBlackHole : MonoBehaviour
 {
     [Space]
     [Header("Projectile Settings")]
-    [SerializeField] float shotCD = 0.5f;
-    [SerializeField] float projectileSpeed = 5f;
-    [SerializeField] float thrust = 10f;
+    [SerializeField] float thrust = 20f;
     [SerializeField] int inAirShotLimit = 2;
-    [SerializeField] int slashDamage = 1;
     float timeOfCast;
     int inAirShots = 0;
 
@@ -63,7 +60,7 @@ public class ShootBlackHole : MonoBehaviour
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             if (Vector2.Distance(newBlackHole.transform.position, mousePos) > 0.1f) 
             {
-            newBlackHoleRB.velocity = new Vector2(mousePos.x - newBlackHole.transform.position.x, mousePos.y - newBlackHole.transform.position.y).normalized * projectileSpeed;
+            newBlackHoleRB.velocity = new Vector2(mousePos.x - newBlackHole.transform.position.x, mousePos.y - newBlackHole.transform.position.y).normalized * (PlayerStats.projectileSpeed / 2);
             }
             else newBlackHoleRB.velocity = Vector2.zero;
 
@@ -118,7 +115,7 @@ public class ShootBlackHole : MonoBehaviour
                     StartCoroutine(RestoreGravity());
                     foreach (Collider2D enemy in nearbyEnemies)
                     {
-                        enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-slashDamage, Vector2.zero);
+                        enemy.GetComponent<EnemyDamageHandler>().TakeDamage(-PlayerStats.meleeDamage, Vector2.zero);
                         GameObject slash = Instantiate(voidSlash, enemy.transform);
                         Destroy(slash, 1);
                     }
@@ -162,14 +159,8 @@ public class ShootBlackHole : MonoBehaviour
 
     IEnumerator ShotCooldown()
     {
-        yield return new WaitForSeconds(shotCD);
+        yield return new WaitForSeconds(PlayerStats.projectileAttackRate);
         onCD = false;
-    }
-
-    IEnumerator WaitBriefly()
-    {
-        yield return new WaitForSecondsRealtime(1);
-        print("Hello");
     }
 
     private void OnDisable() {

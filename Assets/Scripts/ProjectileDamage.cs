@@ -7,23 +7,14 @@ public class ProjectileDamage : MonoBehaviour
     [Header("Bullet Logic")]
     public int bulletDamage = 1;
     [SerializeField] float bulletLife = 0;
-    [SerializeField] bool playerBullet = false; //Stops player from damaging themself
+
     [Space]
     [Header("Audio")]
     [SerializeField] AudioClip[] bulletImpact;
 
-    //Cached references
-    BoxCollider2D boxCollider;
-
-    void Start()
-    {
-        boxCollider = GetComponent<BoxCollider2D>();
-    }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if (other.collider.tag == "Player" && playerBullet) return;
-        else if (other.collider.tag == "Player") other.collider.GetComponent<DamageHandler>().TakeDamage(-bulletDamage);
-        else if (other.collider.tag == "Enemy" && playerBullet) other.collider.GetComponent<EnemyDamageHandler>().TakeDamage(-bulletDamage, new Vector2(other.collider.transform.position.x - transform.position.x, other.collider.transform.position.y - transform.position.y).normalized);
+        if (other.collider.tag == "Player") other.collider.GetComponent<DamageHandler>().TakeDamage(-bulletDamage);
         GlobalAudio.PlaySFX(bulletImpact);
     }
 }

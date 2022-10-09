@@ -12,12 +12,12 @@ public class ElementHandler : MonoBehaviour
     
     void OnEnable() 
     {
-        GameSession.OnChangeElement += ChangeElement;
+        PlayerStats.OnChangeElement += ChangeElement;
     }
 
     void OnDisable() 
     {
-        GameSession.OnChangeElement -= ChangeElement;
+        PlayerStats.OnChangeElement -= ChangeElement;
     }
     void Start() 
     {
@@ -31,7 +31,7 @@ public class ElementHandler : MonoBehaviour
     
     void ChangeElement()
     {
-        currentElement = GameSession.playerElement;
+        currentElement = PlayerStats.playerElement;
         int i = 0;
         foreach (Transform element in bulletSpawn.transform)
         {

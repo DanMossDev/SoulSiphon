@@ -63,7 +63,6 @@ public class FlyingAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        print(nextPoint);
         if (path == null) return;
         if (currentWaypoint >= path.vectorPath.Count)
         {

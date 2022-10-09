@@ -9,7 +9,7 @@ public class UpdateSoulText : MonoBehaviour
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
-        text.text = "This will replace your " + GameSession.playerElement + " soul";
-        if (GameSession.playerElement == "wind") text.text = "";
+        text.text = "This will replace your " + PlayerStats.playerElement + " soul";
+        if (PlayerStats.playerElement == "wind") text.text = "";
     }
 }

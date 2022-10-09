@@ -5,7 +5,6 @@ using TMPro;
 
 public class CoinCounter : MonoBehaviour
 {
-    GameSession gameSession;
     DisplayCoins displayCoins;
     DisplayScore displayScore;
     int coinCount = 0;
@@ -19,7 +18,7 @@ public class CoinCounter : MonoBehaviour
     public void AddCoin()
     {
         coinCount++;
-        GameSession.score += 100;
+        PlayerStats.score += 100;
         thisLevelScore += 100;
         displayCoins.UpdateCount(coinCount);
         displayScore.UpdateScore();
@@ -31,6 +30,6 @@ public class CoinCounter : MonoBehaviour
 
     public void OnDeath()
     {
-        GameSession.score -= thisLevelScore;
+        PlayerStats.score -= thisLevelScore;
     }
 }

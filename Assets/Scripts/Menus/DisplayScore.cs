@@ -5,14 +5,12 @@ using TMPro;
 
 public class DisplayScore : MonoBehaviour
 {
-    GameSession gameSession;
-
     void Start() {
  
         UpdateScore();
     }
     public void UpdateScore()
     {
-        GetComponent<TextMeshProUGUI>().SetText("Score: " + GameSession.score);
+        GetComponent<TextMeshProUGUI>().SetText("Score: " + PlayerStats.score);
     }
 }

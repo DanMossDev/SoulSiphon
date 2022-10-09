@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 261527640599148388}
   - component: {fileID: 5417518204954742437}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,11 +48,11 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.66
+  m_Color: {r: 0.8679245, g: 0.51461, b: 0.26610893, a: 1}
+  m_Intensity: 3.6
   m_LightVolumeIntensity: 0
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000a51a3c61a1092cb2fdd23c81c7266af34dab9568edd64caa6b063fc721b8320fbb1a74db
+  m_ApplyToSortingLayers: 31233032a51a3c61
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -123,12 +123,12 @@ GameObject:
   - component: {fileID: 2701533919028017036}
   - component: {fileID: 2701533919028017037}
   - component: {fileID: 4951748422579542633}
-  - component: {fileID: 1461646826}
   - component: {fileID: 8875950612942396816}
   - component: {fileID: 7067855458004069644}
-  m_Layer: 13
+  - component: {fileID: 3518704137400451028}
+  m_Layer: 21
   m_Name: Fireball
-  m_TagString: Bullet
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,28 +247,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.42510438, y: 0.6211916}
   m_EdgeRadius: 0
---- !u!114 &1461646826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2701533919028017038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fcfb0764464e46478b3882440f36963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletDamage: 1
-  bulletLife: 0
-  playerBullet: 1
-  bulletImpact:
-  - {fileID: 8300000, guid: db513d0f147c8b04eae7ee15520b4137, type: 3}
-  - {fileID: 8300000, guid: e80f1f2ed525b9a47983aaa88b69e838, type: 3}
-  - {fileID: 8300000, guid: 10d348da3c90c4e4d978ad6b1efd7e91, type: 3}
-  - {fileID: 8300000, guid: 5a2941856c11f7845803ccf17445ce0a, type: 3}
-  - {fileID: 8300000, guid: 52415dc0b3716b14ca45b171d32eef7f, type: 3}
-  - {fileID: 8300000, guid: 88fd76b9ebe3e914cb4dd74276aa8b55, type: 3}
 --- !u!50 &8875950612942396816
 Rigidbody2D:
   serializedVersion: 4
@@ -303,3 +281,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePit: {fileID: 7867364176291841184, guid: 2b604ba2305fda043b37c8adf4e75e00, type: 3}
+--- !u!114 &3518704137400451028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701533919028017038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dc0eeadd106cb43a2318504af300bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletLife: 0
+  damageMultiplier: 1
+  bulletImpact:
+  - {fileID: 8300000, guid: db513d0f147c8b04eae7ee15520b4137, type: 3}
+  - {fileID: 8300000, guid: e80f1f2ed525b9a47983aaa88b69e838, type: 3}
+  - {fileID: 8300000, guid: 10d348da3c90c4e4d978ad6b1efd7e91, type: 3}
+  - {fileID: 8300000, guid: 5a2941856c11f7845803ccf17445ce0a, type: 3}
+  - {fileID: 8300000, guid: 52415dc0b3716b14ca45b171d32eef7f, type: 3}
+  - {fileID: 8300000, guid: 88fd76b9ebe3e914cb4dd74276aa8b55, type: 3}

@@ -6,10 +6,6 @@ using UnityEngine.InputSystem;
 public class ShootFireball : MonoBehaviour
 {
     [Header("Game Feel")]
-    [Tooltip("Max speed of the bullet")]
-    [SerializeField] float maxBulletSpeed = 5f;
-    [SerializeField] float bulletChargeSpeed = 3f;
-    [SerializeField] float shotCD = 0.5f;
     [SerializeField] float turnRate = 150;
     [Space]
     [Header("Prefabs and Game Objects")]
@@ -49,10 +45,9 @@ public class ShootFireball : MonoBehaviour
             Vector3[] trajectory = Plot(bullet.GetComponent<Rigidbody2D>(), bulletSpawner.position, bulletVelocity, 2000);
             lineRenderer.SetPositions(trajectory);
 
-            if (bulletSpeed == maxBulletSpeed) return;
-            bulletSpeed += Time.deltaTime * bulletChargeSpeed;
-            if (bulletSpeed > maxBulletSpeed) bulletSpeed = maxBulletSpeed;
-
+            if (bulletSpeed == PlayerStats.projectileSpeed) return;
+            bulletSpeed += Time.deltaTime * PlayerStats.projectileSpeed / 3;
+            if (bulletSpeed > PlayerStats.projectileSpeed) bulletSpeed = PlayerStats.projectileSpeed;
         }
     }
 
@@ -121,7 +116,7 @@ public class ShootFireball : MonoBehaviour
 
     IEnumerator ShotCooldown()
     {
-        yield return new WaitForSeconds(shotCD);
+        yield return new WaitForSeconds(PlayerStats.projectileAttackRate);
         onCD = false;
     }
 }
